@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+
+    <title>JSON</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+
+
+
+    <link rel="stylesheet" href="style.css" type="text/css">
+</head>
+
+<body>
+        <div class="jumbotron">
+        <h1>Rick and Morty</h1>
+        <p1>PICKLE RICK</p1>
+
+    </div>
+
+    <div class="col-sm">
+
+        <div> This API returns information about Rick and Morty characters </div>
+        <p> You can search for a character through number ids</p>
+        <p> i.e. Rick id = 1, Morty id=2, Summer id = 3</p>
+
+        <input type="button" onclick="shuffleDeck()" value="Character">
+        <input type="text" id=searchTerm placeholder="pickle">
+
+        <p id="joke"></p>
+
+    </div>
+
+
+
+
+    <script>
+        function shuffleDeck() {
+            let searchTerm = document.getElementById('searchTerm').value;
+            console.log(searchTerm);
+            let url = 'https://rickandmortyapi.com/api/character/' + searchTerm;
+            fetch(url)
+
+                .then((response) => {
+                    return response.json();
+
+                })
+                .then((Sean) => {
+                    console.log(Sean);
+
+
+                    let p = document.getElementById('joke');
+                    p.innerHTML = "Name: " + Sean.name + '<br>';
+                    p.innerHTML += "Status: " + Sean.status + '<br>';
+                    p.innerHTML += "Species: " + Sean.species + '<br>';
+                    p.innerHTML += "Type: " + Sean.type + '<br>';
+                    p.innerHTML += "Gender: " + Sean.gender + '<br>';
+                    //                    p.innerHTML += "Origin: " + "<a href='" + Sean.origin + "'>" + Sean.origin + "</a>" + '<br>';
+                    //                    p.innerHTML += "Status: " + Sean.status + '<br>';
+                    p.innerHTML += "Image: " + "<img src='" + Sean.image + "'>" + '<br>';
+
+
+
+                });
+        }
+    </script>
+    <p>Credit to the Rick and Morty API</p>
+    <p>URL: <a href="https://rickandmortyapi.com">https://rickandmortyapi.com</a></p>
+
+</body></html>
